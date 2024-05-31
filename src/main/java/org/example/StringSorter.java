@@ -1,14 +1,16 @@
 package org.example;
 
 
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class StringSorter<E> {
-    public List<E> alphabeticallSorting(List<E> stringList){
+    public List<String> alphabeticallSorting(List<E> stringList){
         return stringList.stream()
-                .peek(string -> string.toString().toUpperCase())
-                .sorted()
+                .map(str -> str.toString().toUpperCase())
+                .sorted(Comparator.reverseOrder())
                 .collect(Collectors.toList());
     }
 }

@@ -1,20 +1,29 @@
 package org.example;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class ArraySorter {
 
     Comparator comparator = (o1, o2) -> 0;
     public void sortingArray(String[] array){
-        List<String> result=Arrays.stream(array)
+        String last= String.valueOf(Arrays.stream(array)
                 .map(str->List.of(str.split(",\s+")))
                 .flatMap(Collection::stream)
-                .sorted()
-                .collect(Collectors.toList());
-        System.out.println(result);
+                .sorted(Collections.reverseOrder()).findFirst().orElse(null));
+        Arrays.stream(array)
+                .map(str->List.of(str.split(",\s+")))
+                .flatMap(Collection::stream)
+                        .sorted()
+                        .forEach(str -> {
+                            if (last.equals(str)){
+                                System.out.print(str);
+                            }
+                            else {
+                                System.out.print(str + ", ");
+                            }
+                        });
     }
 }
