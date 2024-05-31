@@ -10,8 +10,8 @@ public class StreamMixer {
         List<T> result=new ArrayList<>();
         Iterator<T> iterator=second.iterator();
         first.filter(item-> iterator.hasNext())
-                .forEach(stream->{
-                    result.add(stream);
+                .forEach(firstElement ->{
+                    result.add(firstElement);
                     result.add(iterator.next());
                 });
         return result.stream();
