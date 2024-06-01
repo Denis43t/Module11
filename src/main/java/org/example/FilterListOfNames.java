@@ -10,20 +10,21 @@ import java.util.stream.Stream;
 
 public class FilterListOfNames<E> {
     public String filtringList(List<E> names) {
-        String result = "";
+        StringBuilder result=new StringBuilder();
         List<Integer> counter= IntStream.range(1, names.size())
                 .filter(i-> i % 2 != 0)
                 .boxed()
                 .toList();
-        for (int index=0; index<counter.size(); index++)
-        {
-            if (index==0){
-                result+=names.get(counter.get(index));
-            }
-            else {
-                result=result+", "+names.get(counter.get(index));
-            }
-        }
-        return result;
+        IntStream.iterate(0,n->n+1)
+                .limit(counter.size())
+                .forEach(element->{
+                    if (element==0){
+                        result.append(counter.get(element)).append(". ").append(names.get(counter.get(element)));
+                    }
+                    else {
+                        result.append(", ").append(counter.get(element)).append(". ").append(names.get(counter.get(element)));
+                    }
+                });
+        return String.valueOf(result);
     }
 }
